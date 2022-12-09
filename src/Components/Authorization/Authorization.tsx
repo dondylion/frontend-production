@@ -13,7 +13,7 @@ export default function Authorization (props: AuthProps) {
     return (
         <div className="h-screen flex items-center justify-center">
             <div className="bg-white rounded-lg shadow-2xl w-[90%] lg:w-[40%] md:w-[60%]">
-                <form className="p-8 md:p-10">
+                <div className="p-8 md:p-10">
                     <div className="items-center text-center text-lg mb-6 md:mb-8">
                         <p className="text-3xl font-semibold mb-4">Привет!</p>
                         <p>Придумай себе ник <br/>(от 3 до 20 символов)</p>
@@ -25,7 +25,12 @@ export default function Authorization (props: AuthProps) {
                             placeholder="Твой ник"
                             maxLength={20}
                             value={name}
-                            onChange={(e) => changeName(e.target.value)}
+                            onChange={(e) => changeName(e.target.value.trim())}
+                            onKeyPress={(e) => {
+                                if (e.key === 'Enter' && able) {
+                                    props.startChat(name);
+                                }
+                            }}
                         />
                     </div>
                     <div
@@ -39,7 +44,7 @@ export default function Authorization (props: AuthProps) {
                     >
                         НАЧАТЬ
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     );

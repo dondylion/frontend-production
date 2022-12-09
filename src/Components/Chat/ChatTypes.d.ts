@@ -1,24 +1,24 @@
 export declare type ChatProps = {}
 
 export declare type UserType = {
+    id: number;
     name: string;
     update: string;
-}
-
-export declare type UserInfoProps = {
-    user: UserType;
 }
 
 export declare type Message = {
     text: string;
     create: string;
     user: string;
+    id: number;
 }
 
 export declare type MessagesProps = {
     content: Array<Message>;
+    currentUser: UserType;
+    update: ()=>void;
 }
 
 export declare type MembersProps = {
-    members: Array<string>;
+    members: Array<UserType>;
 }

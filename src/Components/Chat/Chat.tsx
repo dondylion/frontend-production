@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {ChatProps, Message, UserType} from "./ChatTypes";
-import UserInfo from "./Components/UserInfo";
 import Messages from "./Components/Messages";
 import Members from "./Components/Members";
 
 export default function Chat (props: ChatProps) {
-    const [members, setMembers] = useState<Array<string>>([]);
+    const [members, setMembers] = useState<Array<UserType>>([]);
     const [messages, setMessages] = useState<Array<Message>>([]);
-    const [userInfo, setUserInfo] = useState<UserType>({name: '', update: ''});
+    const [userInfo, setUserInfo] = useState<UserType>({name: '', update: '', id: 0});
 
     const checkStorage = (keys: Array<string>) => {
         if (keys.includes('users')) {
@@ -16,7 +15,7 @@ export default function Chat (props: ChatProps) {
         }
         if (keys.includes('messages')) {
             const currentMessages: string | null = localStorage.getItem('messages');
-            if (currentMessages) setMessages(JSON.parse(currentMessages));
+            if (currentMessages !== null) setMessages(JSON.parse(currentMessages));
         }
         if (keys.includes('currentUser')) {
             const currentUser: string | null = sessionStorage.getItem('currentUser');
@@ -33,10 +32,17 @@ export default function Chat (props: ChatProps) {
     }, [])
 
     return (
-        <div className='grid grid-cols-5 bg-teal-200'>
-            <UserInfo user={userInfo}/>
-            <Messages content={messages}/>
-            <Members members={members}/>
+        <div className='grid grid-cols-6 bg-teal-200'>
+            <div className='col-span-1 h-screen'>
+                <Members members={members}/>
+            </div>
+            <div className='h-screen col-span-5'>
+                <Messages
+                    content={messages}
+                    currentUser={userInfo}
+                    update={()=>{checkStorage(['messages'])}}
+                />
+            </div>
         </div>
     );
 }
