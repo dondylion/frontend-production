@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {ChatProps, Message, UserType} from "./ChatTypes";
+import {Message, UserType} from "./ChatTypes";
 import Messages from "./Components/Messages";
 import Members from "./Components/Members";
 
-export default function Chat (props: ChatProps) {
+export default function Chat () {
     const [members, setMembers] = useState<Array<UserType>>([]);
     const [messages, setMessages] = useState<Array<Message>>([]);
     const [userInfo, setUserInfo] = useState<UserType>({name: '', update: '', id: 0});

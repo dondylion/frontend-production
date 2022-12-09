@@ -17,7 +17,7 @@ export default function Messages(props: MessagesProps) {
             if (message.trim().length > 0) {
                 const newMessage: Message = {
                     text: message.trim(),
-                    create: moment().format('hh.mm'),
+                    create: moment().format('HH:mm'),
                     user: currentUser.name,
                     id: Date.now(),
                     userId: currentUser.id,
@@ -57,9 +57,7 @@ export default function Messages(props: MessagesProps) {
                                     px-4 py-2 rounded-md mb-4 shadow-md`
                                 }
                             >
-                                <div
-                                    className='text-xl text-start whitespace-pre-wrap break-words'
-                                >
+                                <div className='text-xl text-start whitespace-pre-wrap break-words'>
                                     {item.text}
                                 </div>
                                 <p className='text-sm text-end'>{item.create}</p>
