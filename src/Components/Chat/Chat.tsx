@@ -32,11 +32,11 @@ export default function Chat (props: ChatProps) {
     }, [])
 
     return (
-        <div className='grid grid-cols-6 bg-teal-200'>
-            <div className='col-span-1 h-screen'>
+        <div className='bg-teal-200 h-full lg:grid lg:grid-cols-7'>
+            <div className='hidden lg:block lg:col-span-2 lg:h-screen'>
                 <Members members={members}/>
             </div>
-            <div className='h-screen col-span-5'>
+            <div className='lg:h-screen col-span-5'>
                 <Messages
                     content={messages}
                     currentUser={userInfo}

@@ -20,6 +20,7 @@ export default function Messages(props: MessagesProps) {
                     create: moment().format('hh.mm'),
                     user: currentUser.name,
                     id: Date.now(),
+                    userId: currentUser.id,
                 }
                 const newMessages = [...content];
                 newMessages.push(newMessage);
@@ -32,19 +33,35 @@ export default function Messages(props: MessagesProps) {
 
     return (
         <div className='bg-slate-50 h-screen p-4 flex flex-col justify-between'>
-            <div className='h-[85vh] p-2 overflow-y-scroll' ref={chatRef}>
+            <div className='lg:h-full p-2 overflow-y-scroll' ref={chatRef}>
                 {content.map((item, index) => {
                     let author: string | null = null;
+                    const myMessage:boolean = item.userId === currentUser.id;
                     if (index === 0 || content[index - 1].user !== item.user) {
                         author = item.user;
                     }
                     return (
-                        <div key={item.id} className='flex flex-col w-max max-w-[50%]'>
+                        <div
+                            key={item.id}
+                            className={
+                                `${myMessage ? 'ml-auto' : ''}
+                                flex flex-col w-max max-w-[100%] md:max-w-[60%]`
+                            }
+                        >
                             {author &&
                             <div className='text-md text-gray-400'>{author}</div>
                             }
-                            <div className='px-4 py-2 bg-slate-100 rounded-md mb-4 shadow-md'>
-                                <div className='text-xl text-start whitespace-pre-wrap break-words'>{item.text}</div>
+                            <div
+                                className={
+                                    `${myMessage ? 'bg-blue-200' : 'bg-slate-200'}
+                                    px-4 py-2 rounded-md mb-4 shadow-md`
+                                }
+                            >
+                                <div
+                                    className='text-xl text-start whitespace-pre-wrap break-words'
+                                >
+                                    {item.text}
+                                </div>
                                 <p className='text-sm text-end'>{item.create}</p>
                             </div>
                         </div>

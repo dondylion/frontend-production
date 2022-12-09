@@ -7,7 +7,7 @@ export default function Authorization (props: AuthProps) {
 
     const changeName = (text: string) => {
         setName(text);
-        setAble(text.length >= 3);
+        setAble(text.trim().length >= 3);
     }
 
     return (
@@ -25,7 +25,7 @@ export default function Authorization (props: AuthProps) {
                             placeholder="Твой ник"
                             maxLength={20}
                             value={name}
-                            onChange={(e) => changeName(e.target.value.trim())}
+                            onChange={(e) => changeName(e.target.value)}
                             onKeyPress={(e) => {
                                 if (e.key === 'Enter' && able) {
                                     props.startChat(name);
@@ -39,7 +39,7 @@ export default function Authorization (props: AuthProps) {
                             ${able ? 'bg-gray-900 cursor-pointer' : 'bg-gray-400 cursor-not-allowed'}`
                         }
                         onClick={() => {
-                            if (able) props.startChat(name);
+                            if (able) props.startChat(name.trim());
                         }}
                     >
                         НАЧАТЬ

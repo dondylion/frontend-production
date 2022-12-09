@@ -10,6 +10,7 @@ export declare type Message = {
     text: string;
     create: string;
     user: string;
+    userId: number;
     id: number;
 }
 

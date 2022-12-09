@@ -32,7 +32,7 @@ function App() {
     }
 
     return (
-        <div className='bg-teal-400'>
+        <div className='bg-teal-400 h-full'>
             {isAuth && <Chat/>}
             {!isAuth && <Authorization startChat={startChat}/>}
         </div>
